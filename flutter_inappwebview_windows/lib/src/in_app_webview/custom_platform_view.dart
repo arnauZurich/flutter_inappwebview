@@ -398,8 +398,9 @@ class _CustomPlatformViewState extends State<CustomPlatformView> {
                       }
                     },
                     onPointerPanZoomUpdate: (ev) {
-                      _controller._setScrollDelta(
-                          ev.panDelta.dx, ev.panDelta.dy);
+                      // Workaround: Block the horizontal scroll to prevent this issue:
+                      // https://github.com/pichillilorenzo/flutter_inappwebview/issues/2503
+                      _controller._setScrollDelta(0, ev.panDelta.dy);
                     },
                     child: MouseRegion(
                         cursor: _cursor,
